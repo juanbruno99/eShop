@@ -11,11 +11,13 @@
 
     <!-- View resolver bean config -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="WEB-INF/views/"/>
+        <property name="prefix" value="/WEB-INF/views/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <!--0.2 Addition of resources folder for Spring MVC to detect on classpath scan, mapped to 'resources' spring-->
+    <!--0.2 Addition of resources folder for Spring MVC to detect on classpath scan, mapped to 'resources' spring
+    This will load the js/css/etc resources through spring
+    -->
     <mvc:resources mapping="/resources/**" location="/WEB-INF/resources/"/>
 
 </beans>

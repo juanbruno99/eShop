@@ -1,6 +1,9 @@
 package com.eshop.controller;
 
+import com.eshop.com.eshop.service.ProductService;
+import com.eshop.model.Product;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -11,10 +14,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
-    private static final String HOME = "home";
+    //TODO: refactor in util or enum for the views, google good practices and follow
+
+    public static final String HOME_VIEW = "home";
+    public static final String PRODUCTS_LIST_VIEW = "listProducts";
+
+    //Dependencies - TODO: inject through Spring
+    ProductService productService = new ProductService();
 
     @RequestMapping("/")
     public String home() {
-        return HOME;
+        return HOME_VIEW;
+    }
+
+    /**
+     * Method handles the display of all the shop products.
+     *
+     * @param model : The model that Spring framework handles for this mapping or controller action. A Model object, with the view name implicitly determined through a RequestToViewNameTranslator
+     * and the model implicitly enriched with command objects
+     * @return  The String corresponding to the view to be resolved
+     */
+
+    @RequestMapping("/productList")
+    public String getProducts(Model model) {
+        //Get the product
+        Product aProduct = productService.getProductsList().get(0);
+        //Add to model
+        model.addAttribute("aProduct", aProduct);
+        //Return the view
+        return PRODUCTS_LIST_VIEW;
     }
 }

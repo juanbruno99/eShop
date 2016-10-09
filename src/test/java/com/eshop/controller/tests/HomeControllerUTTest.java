@@ -1,6 +1,7 @@
 package com.eshop.controller.tests;
 
 import com.eshop.controller.HomeController;
+import com.eshop.model.Product;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,10 +43,13 @@ public class HomeControllerUTTest {
 
     //Mock for the controller to be tested
     private MockMvc mockMvc;
+    private String LIST_URL_PATH = "/productList";
 
     @Before
     public void setUp() {
         // MockMvc class is the main entry point of our tests. We can execute requests by calling its perform(RequestBuilder requestBuilder) method.
+        // This method also 'Configures' the mock for the view resolver used in tests, exception resolvers and validator
+        // as it would be done programatically or through xml in an web app context file.
         mockMvc = MockMvcBuilders.standaloneSetup(new HomeController())
                 .setHandlerExceptionResolvers(exceptionResolver())
                 .setValidator(validator())
@@ -61,10 +65,23 @@ public class HomeControllerUTTest {
         //Test throught the mock call of the request generated
         mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("home"))
+                .andExpect(view().name(HomeController.HOME_VIEW))
                 .andExpect(forwardedUrl("WEB-INF/views/home.jsp"))
                 ;
 
+    }
+
+    //Method test that when the URL resource is requested for all the products it brings results into the model
+    @Test
+    public void testListAllProducts() throws Exception {
+        //Test by calling the correct resource URL path
+        mockMvc.perform(get(LIST_URL_PATH))
+                .andExpect(status().isOk())
+                .andExpect(view().name(HomeController.PRODUCTS_LIST_VIEW))
+                .andExpect(forwardedUrl("WEB-INF/views/listProducts.jsp"))
+                //// TODO: 10/9/16 : When test context is added and configured, assert to mocked product in service 
+                .andExpect(model().attribute("aProduct", hasProperty("productName")))
+                ;
     }
 
     //Set up of the needed resolvers and validators - TODO: Could go into separate class util, or extend from base class
@@ -95,6 +112,7 @@ public class HomeControllerUTTest {
         return new LocalValidatorFactoryBean();
     }
 
+    //The Spring ViewResolver bean class returned for this UT - TODO: Could also go into separate test utils class or base class
     private ViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
 
