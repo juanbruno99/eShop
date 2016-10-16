@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 /**
  * This class represents the Home Controller for the web application
  *
@@ -35,12 +37,13 @@ public class HomeController {
      * @return  The String corresponding to the view to be resolved
      */
 
+    //This should definitely go to a new controller for products with a Products URI mapping, but for simplicity now here
     @RequestMapping("/productList")
     public String getProducts(Model model) {
         //Get the product
-        Product aProduct = productService.getProductsList().get(0);
+        List<Product> productList = productService.getProductsList();
         //Add to model
-        model.addAttribute("aProduct", aProduct);
+        model.addAttribute("products", productList);
         //Return the view
         return PRODUCTS_LIST_VIEW;
     }

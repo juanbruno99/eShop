@@ -79,8 +79,8 @@ public class HomeControllerUTTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name(HomeController.PRODUCTS_LIST_VIEW))
                 .andExpect(forwardedUrl("WEB-INF/views/listProducts.jsp"))
-                //// TODO: 10/9/16 : When test context is added and configured, assert to mocked product in service 
-                .andExpect(model().attribute("aProduct", hasProperty("productName")))
+                //// TODO: 10/9/16 : When test context is added and configured, assert to mocked product in service
+                .andExpect(model().attributeExists("products"))
                 ;
     }
 

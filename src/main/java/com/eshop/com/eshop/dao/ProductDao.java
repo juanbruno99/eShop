@@ -15,10 +15,9 @@ import java.util.List;
 public class ProductDao {
 
     //For now and basic layer testing purposes add dummy date, later DataSource will be added
-    private List<Product> productList = new ArrayList<Product>();;
+    private static List<Product> productList = new ArrayList<Product>();
 
-    //Function to retrieve the list of products
-    public List<Product> getProductList() {
+    static {
         Product aProduct = new Product();
         aProduct.setProductName("Guitar");
         aProduct.setProductCategory("Music Instruments");
@@ -29,8 +28,22 @@ public class ProductDao {
         aProduct.setProductStatus("Available");
         aProduct.setUnitsInStock(10);
 
-        productList.add(aProduct);
+        Product anotherProduct = new Product();
+        anotherProduct.setProductName("Pink Floyd - Dark Side of the moon");
+        anotherProduct.setProductCategory("Music Record");
+        anotherProduct.setProductCondition("New");
+        anotherProduct.setProductDescription("Classical Progressive Rock");
+        anotherProduct.setProductManufacturer("Sony Records");
+        anotherProduct.setProductPrice(25.0);
+        anotherProduct.setProductStatus("Available");
+        anotherProduct.setUnitsInStock(5);
 
+        productList.add(aProduct);
+        productList.add(anotherProduct);
+    }
+
+    //Function to retrieve the list of products
+    public List<Product> getProductList() {
         return productList;
     }
 }
