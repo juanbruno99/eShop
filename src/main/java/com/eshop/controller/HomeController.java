@@ -20,6 +20,7 @@ public class HomeController {
 
     public static final String HOME_VIEW = "home";
     public static final String PRODUCTS_LIST_VIEW = "listProducts";
+    public static final String PRODUCTS_VIEW = "viewProduct";
 
     //Dependencies - TODO: inject through Spring
     ProductService productService = new ProductService();
@@ -47,4 +48,11 @@ public class HomeController {
         //Return the view
         return PRODUCTS_LIST_VIEW;
     }
+
+    //Method just returns the product detail view name to be resolved
+    @RequestMapping("/productList/viewProduct")
+    public String viewProduct() {
+        return PRODUCTS_VIEW;
+    }
+
 }
