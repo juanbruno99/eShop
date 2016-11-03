@@ -44,6 +44,7 @@ public class HomeControllerUTTest {
     //Mock for the controller to be tested
     private MockMvc mockMvc;
     private String LIST_URL_PATH = "/productList";
+    private String PRODUCT_VIEW_URL_PATH = "/productList/viewProduct";
 
     @Before
     public void setUp() {
@@ -81,6 +82,16 @@ public class HomeControllerUTTest {
                 .andExpect(forwardedUrl("WEB-INF/views/listProducts.jsp"))
                 //// TODO: 10/9/16 : When test context is added and configured, assert to mocked product in service
                 .andExpect(model().attributeExists("products"))
+                ;
+    }
+
+    //Method test that when the URL resource for viewing a specific product is called it returns the right view
+    @Test
+    public void testViewProduct() throws Exception {
+        mockMvc.perform(get(PRODUCT_VIEW_URL_PATH))
+                .andExpect(status().isOk())
+                .andExpect(view().name(HomeController.PRODUCTS_VIEW))
+                .andExpect(forwardedUrl("WEB-INF/views/viewProduct.jsp"))
                 ;
     }
 

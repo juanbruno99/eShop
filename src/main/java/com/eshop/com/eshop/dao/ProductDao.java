@@ -19,6 +19,7 @@ public class ProductDao {
 
     static {
         Product aProduct = new Product();
+        aProduct.setId(1L);
         aProduct.setProductName("Guitar");
         aProduct.setProductCategory("Music Instruments");
         aProduct.setProductCondition("New");
@@ -29,6 +30,7 @@ public class ProductDao {
         aProduct.setUnitsInStock(10);
 
         Product anotherProduct = new Product();
+        aProduct.setId(2L);
         anotherProduct.setProductName("Pink Floyd - Dark Side of the moon");
         anotherProduct.setProductCategory("Music Record");
         anotherProduct.setProductCondition("New");
@@ -43,7 +45,15 @@ public class ProductDao {
     }
 
     //Function to retrieve the list of products
-    public List<Product> getProductList() {
+    public List<Product> getProductsList() {
         return productList;
+    }
+
+    public Product getProductById(Long id) {
+        for (Product aProduct:productList) {
+            if(aProduct.getId().equals(id))
+                return aProduct;
+        }
+        return null;
     }
 }

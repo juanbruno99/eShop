@@ -1,5 +1,6 @@
 <!-- since @v05: This line imports the Spring tags, also template header added -->
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="/WEB-INF/views/template/header.jsp"%>
 
 
@@ -20,6 +21,7 @@
                     <th>Category</th>
                     <th>Condition</th>
                     <th>Price</th>
+                    <th></th>
                 </tr>
             </thead>
             <!-- Browse with jstl for each tag here to go through all products -->
@@ -32,6 +34,9 @@
                 <td>${aProduct.productCategory}</td>
                 <td>${aProduct.productCondition}</td>
                 <td>${aProduct.productPrice} USD</td>
+                <!-- Using a spring tag to send a value [param] to the backend [controller] -->
+                <td><a href="<spring:url value="/productList/viewProduct/${aProduct.id}"/>">
+                    <span class="glyphicon glyphicon-info-sign"/></a></td>
             </tr>
             </c:forEach>
         </table>

@@ -9,7 +9,10 @@ package com.eshop.model;
  */
 public class Product {
 
+
+
     //Basic and generic properties, can be more Object Oriented, that is changed for enums and other objects later.
+    private Long id;
     private String productName;
     private String productCategory;
     private String productDescription;
@@ -83,5 +86,13 @@ public class Product {
 
     public void setProductName(String productName) {
         this.productName = productName;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

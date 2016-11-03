@@ -26,8 +26,11 @@ public class ProductService {
      *
      */
     public List<Product> getProductsList() {
-        return productDao.getProductList();
+        return productDao.getProductsList();
     }
 
 
+    public Product getProductById(Long id) {
+        return productDao.getProductById(id);
+    }
 }

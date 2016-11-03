@@ -4,7 +4,9 @@ import com.eshop.com.eshop.service.ProductService;
 import com.eshop.model.Product;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.portlet.ModelAndView;
 
 import java.util.List;
 
@@ -49,9 +51,14 @@ public class HomeController {
         return PRODUCTS_LIST_VIEW;
     }
 
-    //Method just returns the product detail view name to be resolved
-    @RequestMapping("/productList/viewProduct")
-    public String viewProduct() {
+    //Method now maps the path parameter from the request into the model
+    @RequestMapping("/productList/viewProduct/{id}")
+    public String viewProduct(@PathVariable Long id, Model model) {
+        //Retrieve the product from the service by the id
+        Product product = productService.getProductById(id);
+        //Add it to the model that the view will receive and work on
+        model.addAttribute("product", product);
+        //Return the view, Spring will handle the model data
         return PRODUCTS_VIEW;
     }
 
