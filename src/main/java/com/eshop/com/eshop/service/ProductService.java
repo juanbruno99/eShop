@@ -1,7 +1,9 @@
 package com.eshop.com.eshop.service;
 
-import com.eshop.com.eshop.dao.ProductDao;
+import com.eshop.dao.ProductDAO;
 import com.eshop.model.Product;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -13,10 +15,11 @@ import java.util.List;
  * @since v04
  *
  */
+@Component
 public class ProductService {
 
-    //DAO object - TODO: Replace with DI from Spring
-    ProductDao productDao = new ProductDao();
+    @Autowired
+    ProductDAO productDao;
 
     /**
      * Method retrieves all the products from the datasource through the corresponding DAO layer object
@@ -26,7 +29,7 @@ public class ProductService {
      *
      */
     public List<Product> getProductsList() {
-        return productDao.getProductsList();
+        return productDao.getAllProducts();
     }
 
 

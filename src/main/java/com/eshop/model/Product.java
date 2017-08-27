@@ -1,5 +1,10 @@
 package com.eshop.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * Created by juanmarcosbruno on 9/20/16.
  *
@@ -7,11 +12,11 @@ package com.eshop.model;
  *
  * @since v04
  */
+@Entity
 public class Product {
 
-
-
-    //Basic and generic properties, can be more Object Oriented, that is changed for enums and other objects later.
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String productName;
     private String productCategory;

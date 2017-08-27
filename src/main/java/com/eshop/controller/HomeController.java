@@ -2,6 +2,7 @@ package com.eshop.controller;
 
 import com.eshop.com.eshop.service.ProductService;
 import com.eshop.model.Product;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,8 +25,8 @@ public class HomeController {
     public static final String PRODUCTS_LIST_VIEW = "listProducts";
     public static final String PRODUCTS_VIEW = "viewProduct";
 
-    //Dependencies - TODO: inject through Spring
-    ProductService productService = new ProductService();
+    @Autowired
+    ProductService productService;
 
     @RequestMapping("/")
     public String home() {
@@ -54,11 +55,11 @@ public class HomeController {
     //Method now maps the path parameter from the request into the model
     @RequestMapping("/productList/viewProduct/{id}")
     public String viewProduct(@PathVariable Long id, Model model) {
-        //Retrieve the product from the service by the id
+        //Retrieve the product from the service by the id when the request is made
         Product product = productService.getProductById(id);
         //Add it to the model that the view will receive and work on
         model.addAttribute("product", product);
-        //Return the view, Spring will handle the model data
+        //Return the view, Spring will handle the model data renderd to the page
         return PRODUCTS_VIEW;
     }
 
